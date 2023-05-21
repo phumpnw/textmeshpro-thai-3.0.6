@@ -1,10 +1,9 @@
 # textmeshpro-thai-3.0.6
 
-change this
-"com.unity.textmeshpro": "3.0.6"
+Goto <b>/Packages/manifest.json</b> in your project and change<br>
+"com.unity.textmeshpro": "3.0.6"<br>
+to<br>
 "com.unity.textmeshpro": "https://github.com/phumpnw/textmeshpro-thai-3.0.6.git"
-To /Packages/manifest.json in your project
-
 
 credit : https://github.com/rutcreate | https://github.com/allfake
 
