@@ -93,6 +93,10 @@ private const int YO_YING_CUT_TAIL = 65541;
 private const int SARA_AA = 3634;
 ```
 
+### Step 3
+Generate font in unity and custom <b>Character set</b> to range or hex https://gist.github.com/allfake/1d5a64c2a1eca36a660c
+
+
 ## Test Text
 ```
 กก่ก้ก๋ก๊ก็ก์กํกิกีกืกึกำกุกูกฺก
