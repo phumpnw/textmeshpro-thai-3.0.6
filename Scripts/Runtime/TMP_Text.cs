@@ -8614,11 +8614,11 @@ namespace TMPro
         //     if (CountSaraAm() == 0) return;
         //
         //     List<int> buffers = new List<int>();
-        //     for (int i = 0; i < m_InternalParsingBuffer.Length; i++)
+        //     for (int i = 0; i < m_TextProcessingArray.Length; i++)
         //     {
-        //         int charCode = m_InternalParsingBuffer[i];
+        //         int charCode = m_TextProcessingArray[i];
         //
-        //         if (i < m_InternalParsingBuffer.Length - 1 && m_InternalParsingBuffer[i + 1] == SARA_AM)
+        //         if (i < m_TextProcessingArray.Length - 1 && m_TextProcessingArray[i + 1] == SARA_AM)
         //         {
         //             if (IsUpperLevel2(charCode))
         //             {
@@ -8640,7 +8640,7 @@ namespace TMPro
         //             buffers.Add(charCode);
         //         }
         //     }
-        //     m_InternalParsingBuffer = buffers.ToArray();
+        //     m_TextProcessingArray = buffers.ToArray();
         // }
 
         private int GetPullUpCharacter(int charCode)
@@ -8772,9 +8772,9 @@ namespace TMPro
         private int CountSaraAm()
         {
             int count = 0;
-            for (int i = 0; m_InternalParsingBuffer[i].unicode != 0; i++)
+            for (int i = 0; m_TextProcessingArray[i].unicode != 0; i++)
             {
-                if (m_InternalParsingBuffer[i].unicode == SARA_AM)
+                if (m_TextProcessingArray[i].unicode == SARA_AM)
                 {
                     count++;
                 }
@@ -8788,32 +8788,32 @@ namespace TMPro
 
             int prevCode = 0;
             int cutCode = 0;
-            for (int i = 0; m_InternalParsingBuffer[i].unicode != 0; i++)
+            for (int i = 0; m_TextProcessingArray[i].unicode != 0; i++)
             {
-                int code = m_InternalParsingBuffer[i].unicode;
+                int code = m_TextProcessingArray[i].unicode;
 
                 if (IsUpperLevel1(code) && IsUpTail(prevCode))
                 {
-                    m_InternalParsingBuffer[i].unicode = GetShiftLeftCharacter(code);
+                    m_TextProcessingArray[i].unicode = GetShiftLeftCharacter(code);
                 }
                 else if (IsUpperLevel2(code))
                 {
                     if (IsLowerLevel(prevCode))
                     {
-                        prevCode = m_InternalParsingBuffer[i - 2].unicode;
+                        prevCode = m_TextProcessingArray[i - 2].unicode;
                     }
 
                     if (IsUpTail(prevCode))
                     {
-                        m_InternalParsingBuffer[i].unicode = GetPullDownAndShiftLeftCharacter(code);
+                        m_TextProcessingArray[i].unicode = GetPullDownAndShiftLeftCharacter(code);
                     }
                     else if (IsLeftShiftUpperLevel1(prevCode))
                     {
-                        m_InternalParsingBuffer[i].unicode = GetShiftLeftCharacter(code);
+                        m_TextProcessingArray[i].unicode = GetShiftLeftCharacter(code);
                     }
                     else if (!IsUpperLevel1(prevCode))
                     {
-                        m_InternalParsingBuffer[i].unicode = GetPullDownCharacter(code);
+                        m_TextProcessingArray[i].unicode = GetPullDownCharacter(code);
                     }
                 }
                 else if (IsLowerLevel(code) && IsDownTail(prevCode))
@@ -8822,22 +8822,22 @@ namespace TMPro
 
                     if (prevCode != cutCode)
                     {
-                        m_InternalParsingBuffer[i - 1].unicode = cutCode;
+                        m_TextProcessingArray[i - 1].unicode = cutCode;
                     }
                     else
                     {
-                        m_InternalParsingBuffer[i].unicode = GetPullDownCharacter(code);
+                        m_TextProcessingArray[i].unicode = GetPullDownCharacter(code);
                     }
                 }
                 else if (IsSaraAm(code) && i > 0)
                 {
                     if (IsPullDown(prevCode))
                     {
-                        m_InternalParsingBuffer[i - 1].unicode = GetPullUpCharacter(prevCode);
+                        m_TextProcessingArray[i - 1].unicode = GetPullUpCharacter(prevCode);
                     }
                 }
 
-                prevCode = m_InternalParsingBuffer[i].unicode;
+                prevCode = m_TextProcessingArray[i].unicode;
             }
         }
         #endregion
