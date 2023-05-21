@@ -8609,39 +8609,39 @@ namespace TMPro
         // for exploded SARA_AM (NIKHAHIT + SARA_AA)
         private const int SARA_AA = 3634;
 
-        private void ExplodeSaraAm()
-        {
-            if (CountSaraAm() == 0) return;
-
-            List<int> buffers = new List<int>();
-            for (int i = 0; i < m_InternalParsingBuffer.Length; i++)
-            {
-                int charCode = m_InternalParsingBuffer[i];
-
-                if (i < m_InternalParsingBuffer.Length - 1 && m_InternalParsingBuffer[i + 1] == SARA_AM)
-                {
-                    if (IsUpperLevel2(charCode))
-                    {
-                        buffers.Add(NIKHAHIT);
-                        buffers.Add(charCode);
-                    }
-                    else
-                    {
-                        buffers.Add(charCode);
-                        buffers.Add(NIKHAHIT);
-                    }
-                }
-                else if (charCode == SARA_AM)
-                {
-                    buffers.Add(SARA_AA);
-                }
-                else
-                {
-                    buffers.Add(charCode);
-                }
-            }
-            m_InternalParsingBuffer = buffers.ToArray();
-        }
+        // private void ExplodeSaraAm()
+        // {
+        //     if (CountSaraAm() == 0) return;
+        //
+        //     List<int> buffers = new List<int>();
+        //     for (int i = 0; i < m_InternalParsingBuffer.Length; i++)
+        //     {
+        //         int charCode = m_InternalParsingBuffer[i];
+        //
+        //         if (i < m_InternalParsingBuffer.Length - 1 && m_InternalParsingBuffer[i + 1] == SARA_AM)
+        //         {
+        //             if (IsUpperLevel2(charCode))
+        //             {
+        //                 buffers.Add(NIKHAHIT);
+        //                 buffers.Add(charCode);
+        //             }
+        //             else
+        //             {
+        //                 buffers.Add(charCode);
+        //                 buffers.Add(NIKHAHIT);
+        //             }
+        //         }
+        //         else if (charCode == SARA_AM)
+        //         {
+        //             buffers.Add(SARA_AA);
+        //         }
+        //         else
+        //         {
+        //             buffers.Add(charCode);
+        //         }
+        //     }
+        //     m_InternalParsingBuffer = buffers.ToArray();
+        // }
 
         private int GetPullUpCharacter(int charCode)
         {
